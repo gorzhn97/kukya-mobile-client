@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "844365018863",
+    "project_id": "kukya-55a01",
+    "storage_bucket": "kukya-55a01.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:844365018863:android:c722c3d914951812f18d1a",
+        "android_client_info": {
+          "package_name": "com.kukya.mobile"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSwnbJcqgXunPw4f7hBBrcJ7au7o3oK0U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
