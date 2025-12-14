@@ -13,6 +13,7 @@ export const colors = {
         secondary: '#3C3C43',
         tertiary: '#8E8E93',
         inverse: '#FFFFFF',
+        muted: 'gray'
     },
 
     border: '#C6C6C8',

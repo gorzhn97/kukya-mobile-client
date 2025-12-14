@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { use, useState } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, ActivityIndicator, Alert } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import { handleAuthError } from '../utils/authErrorHandler';
+import FormInput from '../../../shared/components/FormInput';
+import { Link, useNavigation } from '@react-navigation/native';
+import { colors } from '../../../shared/theme';
 
 export const LoginScreen = () => {
     const [email, setEmail] = useState('');
@@ -9,6 +12,7 @@ export const LoginScreen = () => {
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const navigation = useNavigation();
 
 
 
@@ -77,6 +81,10 @@ export const LoginScreen = () => {
         }
     };
 
+    const navigateToSignUp = (): void => {
+        navigation.navigate('SignUp' as never);
+    }
+
     if (isLoading) {
         return (
             <View style={styles.loadingContainer}>
@@ -90,33 +98,25 @@ export const LoginScreen = () => {
         <View style={styles.container}>
             <Text style={styles.title}>Welcome Back</Text>
 
-            <View style={styles.inputContainer}>
-                <TextInput
-                    style={[styles.input, emailError ? styles.inputError : null]}
-                    placeholder="Email"
-                    placeholderTextColor="#999"
-                    value={email}
-                    onChangeText={handleEmailChange}
-                    onBlur={() => validateEmail(email)}
-                    keyboardType="email-address"
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                />
-                {emailError ? <Text style={styles.errorText}>{emailError}</Text> : null}
-            </View>
+            <FormInput
+                placeholder="Email"
+                value={email}
+                onChangeText={handleEmailChange}
+                onBlur={() => validateEmail(email)}
+                keyboardType="email-address"
+                autoCapitalize="none"
+                autoCorrect={false}
+                error={emailError}
+            />
 
-            <View style={styles.inputContainer}>
-                <TextInput
-                    style={[styles.input, passwordError ? styles.inputError : null]}
-                    placeholder="Password"
-                    placeholderTextColor="#999"
-                    secureTextEntry={true}
-                    value={password}
-                    onChangeText={handlePasswordChange}
-                    onBlur={() => validatePassword(password)}
-                />
-                {passwordError ? <Text style={styles.errorText}>{passwordError}</Text> : null}
-            </View>
+            <FormInput
+                placeholder="Password"
+                value={password}
+                onChangeText={handlePasswordChange}
+                onBlur={() => validatePassword(password)}
+                secureTextEntry={true}
+                error={passwordError}
+            />
 
             <TouchableOpacity
                 style={styles.button}
@@ -125,12 +125,22 @@ export const LoginScreen = () => {
             >
                 <Text style={styles.buttonText}>Login</Text>
             </TouchableOpacity>
-        </View>
+
+            <Text style={styles.orText}>Or</Text>
+            <TouchableOpacity
+                style={styles.signupButton}
+                onPress={() => navigateToSignUp()}
+                activeOpacity={0.8}
+            >
+                <Text style={styles.signupText}>Sign Up</Text>
+            </TouchableOpacity>
+        </View >
     );
 
 
 
 }
+
 
 const styles = StyleSheet.create({
     container: {
@@ -138,24 +148,24 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: 20,
-        backgroundColor: '#fff',
+        backgroundColor: colors.background ?? '#ffffff',
     },
     loadingContainer: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#fff',
+        backgroundColor: colors.background ?? '#ffffff',
     },
     loadingText: {
         marginTop: 16,
         fontSize: 16,
-        color: '#666',
+        color: colors.text.secondary ?? '#666666',
     },
     title: {
         fontSize: 28,
         fontWeight: 'bold',
         marginBottom: 40,
-        color: '#000',
+        color: colors.text.primary ?? '#000000',
     },
     inputContainer: {
         width: '100%',
@@ -165,19 +175,19 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 50,
         borderWidth: 1,
-        borderColor: '#ddd',
+        borderColor: colors.border ?? '#dddddd',
         borderRadius: 8,
         paddingHorizontal: 16,
         fontSize: 16,
-        backgroundColor: '#fff',
-        color: '#000',
+        backgroundColor: colors.background ?? '#ffffff',
+        color: colors.text.primary ?? '#000000',
     },
     inputError: {
-        borderColor: '#FF3B30',
+        borderColor: colors.error ?? '#FF3B30',
         borderWidth: 2,
     },
     errorText: {
-        color: '#FF3B30',
+        color: colors.error ?? '#FF3B30',
         fontSize: 12,
         marginTop: 4,
         marginLeft: 4,
@@ -185,14 +195,34 @@ const styles = StyleSheet.create({
     button: {
         width: '100%',
         height: 50,
-        backgroundColor: '#007AFF',
+        backgroundColor: colors.primary ?? '#007AFF',
         borderRadius: 8,
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 20,
     },
     buttonText: {
-        color: '#fff',
+        color: colors.text.inverse ?? '#ffffff',
+        fontSize: 16,
+        fontWeight: '600',
+    },
+    orText: {
+        marginTop: 12,
+        marginBottom: 8,
+    },
+    signupButton: {
+        alignSelf: 'stretch',
+        marginTop: 8,
+        paddingVertical: 12,
+        borderRadius: 8,
+        borderWidth: 1,
+        borderColor: colors.primary ?? '#007AFF',
+        backgroundColor: 'transparent',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    signupText: {
+        color: colors.primary ?? '#007AFF',
         fontSize: 16,
         fontWeight: '600',
     },

@@ -6,7 +6,6 @@ import { RootNavigator } from './src/app/navigation';
 enableScreens();
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
-  console.log('in the app component entry point')
   return (
     <SafeAreaProvider>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
