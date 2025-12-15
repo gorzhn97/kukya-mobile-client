@@ -1,9 +1,9 @@
-import React, { use, useState } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, ActivityIndicator, Alert } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator, Alert } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import { handleAuthError } from '../utils/authErrorHandler';
 import FormInput from '../../../shared/components/FormInput';
-import { Link, useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { colors } from '../../../shared/theme';
 
 export const LoginScreen = () => {
