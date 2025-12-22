@@ -3,13 +3,11 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Navbar } from '../../shared/components/Navbar';
 import { HouseholdsList } from '../../features/households/screens/HouseholdsList/HouseholdsList';
-import { Modal, Text, Touchable, TouchableOpacity, View } from 'react-native';
+import { Modal, Text, TouchableOpacity, View } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import { useNavigation } from '@react-navigation/native';
 
 const Stack = createNativeStackNavigator();
-
-
 
 const AppNavigatorContent = () => {
     const currentRouteName = 'asd';

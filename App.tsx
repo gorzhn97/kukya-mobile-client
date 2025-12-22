@@ -1,16 +1,23 @@
 import React from 'react';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
+import { StatusBar, useColorScheme } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { enableScreens } from 'react-native-screens';
 import { RootNavigator } from './src/app/navigation';
+import { AppContextProvider } from './src/contexts/app/AppProvider';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 enableScreens();
+const queryClient = new QueryClient()
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
   return (
-    <SafeAreaProvider>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <RootNavigator />
-    </SafeAreaProvider>
+    <QueryClientProvider client={queryClient}>
+      <AppContextProvider>
+        <SafeAreaProvider>
+          <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+          <RootNavigator />
+        </SafeAreaProvider>
+      </AppContextProvider>
+    </QueryClientProvider>
   );
 }
 

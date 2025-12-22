@@ -22,7 +22,7 @@ export const LoginScreen = () => {
             setEmailError('Email is required');
             return false;
         } else if (!emailRegex.test(input)) {
-            setEmailError('Please enter a valid email address');
+            setEmailError('Pl   ease enter a valid email address');
             return false;
         } else {
             setEmailError('');
