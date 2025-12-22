@@ -1,8 +1,9 @@
+import { Household } from '../../models/households/domain/household';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+import { NEST_PUBLIC_API_URL } from '@env';
 
-export const getHouseholds = async () => {
-    const res: Response = await fetch(`${API_URL}/api/households`);
+export const getHouseholds = async (): Promise<Household[]> => {
+    const res: Response = await fetch(`${NEST_PUBLIC_API_URL}/households`);
     if (!res.ok) return [];
     return res.json();
 }
